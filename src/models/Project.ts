@@ -1,9 +1,8 @@
 import { sequelize } from "../utils/connectDB";
 import { DataTypes, Model, Optional } from "sequelize";
 
-// Define the attributes of your Project model
 interface ProjectAttributes {
-  id: number; // Assuming you have an auto-incrementing primary key
+  id: number;
   author_name: string;
   project_title: string;
   date_of_submission: Date;
@@ -15,25 +14,9 @@ interface ProjectAttributes {
   updatedAt?: Date;
 }
 
-// Define which attributes are optional during creation
-// The ID field is typically optional during creation as it's auto-generated
 interface ProjectCreationAttributes extends Optional<ProjectAttributes, "id" | "createdAt" | "updatedAt"> {}
 
-// Define the Project model with proper TypeScript typing
-class Project extends Model<ProjectAttributes, ProjectCreationAttributes> implements ProjectAttributes {
-  public id!: number;
-  public author_name!: string;
-  public project_title!: string;
-  public date_of_submission!: Date;
-  public abstract!: string;
-  public aims!: string;
-  public objectives!: string[];
-  public supervisor!: string;
-
-  // Timestamps
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
-}
+class Project extends Model<ProjectAttributes, ProjectCreationAttributes> {}
 
 Project.init(
   {
