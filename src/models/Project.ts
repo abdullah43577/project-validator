@@ -1,22 +1,18 @@
 import { sequelize } from "../utils/connectDB";
-import { DataTypes, Model, Optional } from "sequelize";
+import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from "sequelize";
 
-interface ProjectAttributes {
-  id: number;
-  author_name: string;
-  project_title: string;
-  date_of_submission: Date;
-  abstract: string;
-  aims: string;
-  objectives: string[];
-  supervisor: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+class Project extends Model<InferAttributes<Project>, InferCreationAttributes<Project>> {
+  declare id: CreationOptional<number>;
+  declare author_name: string;
+  declare project_title: string;
+  declare date_of_submission: Date;
+  declare abstract: string;
+  declare aims: string;
+  declare objectives: string[];
+  declare supervisor: string;
+  declare createdAt: CreationOptional<Date>;
+  declare updatedAt: CreationOptional<Date>;
 }
-
-interface ProjectCreationAttributes extends Optional<ProjectAttributes, "id" | "createdAt" | "updatedAt"> {}
-
-class Project extends Model<ProjectAttributes, ProjectCreationAttributes> {}
 
 Project.init(
   {
