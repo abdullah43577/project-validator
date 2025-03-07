@@ -5,7 +5,8 @@
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsc --watch",
-    "start": "nodemon dist/server.js"
+    "start": "nodemon dist/server.js",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "ReactMode",
