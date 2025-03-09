@@ -22,6 +22,12 @@ const createProject = async function (req: Request, res: Response) {
 
     const project = await Project.create(value);
 
+    //* invalidate cache if there is
+    const cachedProjects = cache.get("projects");
+    if (cachedProjects) {
+      cache.del("projects");
+    }
+
     res.status(200).json({ message: "Project created successfully!", project_id: project.id });
   } catch (error) {
     res.status(500).json({ message: "Error creating project", error });
@@ -89,6 +95,12 @@ const editProject = async function (req: Request, res: Response) {
 
     await project.update(value);
 
+    //* invalidate cache if there is
+    const cachedProjects = cache.get("projects");
+    if (cachedProjects) {
+      cache.del("projects");
+    }
+
     res.status(200).json({ message: "Records updated successfully!", project });
   } catch (error) {
     res.status(500).json({ message: "Error editing project", error });
@@ -104,6 +116,12 @@ const deleteProject = async function (req: Request, res: Response) {
     if (!project) return res.status(400).json({ message: "Project with the specified ID does not exist!" });
 
     project.destroy();
+
+    //* invalidate cache if there is
+    const cachedProjects = cache.get("projects");
+    if (cachedProjects) {
+      cache.del("projects");
+    }
 
     res.status(200).json({ message: "Project deleted successfully!" });
   } catch (error) {
