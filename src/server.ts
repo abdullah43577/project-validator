@@ -8,7 +8,7 @@ import { router } from "./routes/router";
 import Cache from "node-cache";
 
 const app = express();
-export const cache = new Cache({ stdTTL: 3600 });
+export const cache = new Cache({ stdTTL: 300 });
 
 app.use(morgan("dev"));
 app.use(

@@ -54,8 +54,10 @@ const getProjects = async function (req: Request, res: Response) {
 
 const getProjectBySearch = async function (req: Request, res: Response) {
   try {
-    const searchQuery = req.query.search as string;
+    let searchQuery = req.query.search as string;
     if (!searchQuery) return res.status(400).json({ message: "wrong or missing query parameters" });
+
+    searchQuery = searchQuery.replace(/['"]/g, "");
 
     const cachedProjects = cache.get(`project_search_${searchQuery}`);
 
