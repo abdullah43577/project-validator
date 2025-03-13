@@ -35,6 +35,6 @@ app.use("*", (req: Request, res: Response) => {
 
 app.listen(8080, async () => {
   await connectDB();
-  sequelize.sync({ alter: true });
+  await sequelize.sync({ alter: true });
   console.log(`server started on http://localhost:8080`);
 });
