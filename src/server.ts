@@ -13,7 +13,7 @@ export const cache = new Cache({ stdTTL: 300 });
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: ["https://project-validator-senans-projects-f6120758.vercel.app", "http://localhost:3000"],
+    origin: ["https://project-validator-senans-projects-f6120758.vercel.app", "http://localhost:3000", "http://localhost:5173"],
   })
 );
 app.use(express.json({ limit: "10mb" }));
