@@ -1,5 +1,5 @@
 import { sequelize } from "../utils/connectDB";
-import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from "sequelize";
+import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model, TEXT } from "sequelize";
 
 class Project extends Model<InferAttributes<Project>, InferCreationAttributes<Project>> {
   declare id: CreationOptional<number>;
@@ -34,11 +34,11 @@ Project.init(
       allowNull: false,
     },
     abstract: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     aims: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     objectives: {
