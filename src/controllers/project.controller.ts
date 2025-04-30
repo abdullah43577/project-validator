@@ -120,6 +120,7 @@ const editProject = async function (req: Request, res: Response) {
     if (!id) return res.status(400).json({ message: "Project ID is required" });
 
     const project = await Project.findByPk(id);
+
     if (!project)
       return res.status(404).json({ message: "Project not found!" });
 
