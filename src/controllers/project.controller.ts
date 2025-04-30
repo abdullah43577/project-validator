@@ -167,7 +167,7 @@ const deleteProject = async function (req: Request, res: Response) {
 
     if (
       project.admin_id !== req.body.admin_id ||
-      project.admin_id !== "PJVLD001"
+      req.body.admin_id !== "PJVLD001"
     )
       return res.status(400).json({ message: "Invalid Admin ID" });
 
