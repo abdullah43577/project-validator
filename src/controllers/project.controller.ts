@@ -3,6 +3,7 @@ import Project from "../models/Project";
 import { editProjectSchema, projectSchema } from "../utils/validators";
 import { cache } from "../server";
 import { Op, Sequelize } from "sequelize";
+import { v4 as uuidv4 } from "uuid";
 
 const testServer = function (req: Request, res: Response) {
   try {
@@ -32,7 +33,15 @@ const createProject = async function (req: Request, res: Response) {
       return res.status(400).json({ message: "Project name already exists" });
     }
 
-    const project = await Project.create(value);
+    const generatedAdminID = `ADM-${Math.random()
+      .toString(36)
+      .substr(2, 8)
+      .toUpperCase()}`;
+
+    const project = await Project.create({
+      ...value,
+      admin_id: generatedAdminID,
+    });
 
     // Invalidate cache if there is
     const cachedProjects = cache.get("projects");
@@ -43,6 +52,7 @@ const createProject = async function (req: Request, res: Response) {
     res.status(200).json({
       message: "Project created successfully!",
       project_id: project.id,
+      admin_id: generatedAdminID,
     });
   } catch (error) {
     res.status(500).json({ message: "Error creating project", error });
