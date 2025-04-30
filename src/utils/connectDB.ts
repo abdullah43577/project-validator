@@ -16,6 +16,7 @@ export const sequelize = new Sequelize(connection_string, {
   dialect: "postgres",
   logging: process.env.NODE_ENV === "development" ? console.log : false,
   dialectOptions: {
+    family: 4,
     ssl: {
       require: true,
       rejectUnauthorized: false,

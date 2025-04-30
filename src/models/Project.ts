@@ -1,8 +1,19 @@
 import { sequelize } from "../utils/connectDB";
-import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model, TEXT } from "sequelize";
+import {
+  CreationOptional,
+  DataTypes,
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+  TEXT,
+} from "sequelize";
 
-class Project extends Model<InferAttributes<Project>, InferCreationAttributes<Project>> {
+class Project extends Model<
+  InferAttributes<Project>,
+  InferCreationAttributes<Project>
+> {
   declare id: CreationOptional<number>;
+  declare admin_id: string;
   declare author_name: string;
   declare project_title: string;
   declare date_of_submission: Date;
@@ -20,6 +31,11 @@ Project.init(
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
+    },
+    admin_id: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "PJVLD001",
     },
     author_name: {
       type: DataTypes.STRING,
@@ -62,6 +78,12 @@ Project.init(
     sequelize,
     modelName: "Project",
     timestamps: true,
+    indexes: [
+      {
+        unique: true,
+        fields: ["project_title"],
+      },
+    ],
   }
 );
 

@@ -1,6 +1,7 @@
 import Joi from "joi";
 
 export const projectSchema = Joi.object({
+  admin_id: Joi.string().min(4).required(),
   author_name: Joi.string().min(3).required(),
   project_title: Joi.string().min(5).required(),
   date_of_submission: Joi.date().iso().required(),
@@ -11,6 +12,7 @@ export const projectSchema = Joi.object({
 });
 
 export const editProjectSchema = Joi.object({
+  admin_id: Joi.string().min(4).required(),
   author_name: Joi.string().min(3).optional(),
   project_title: Joi.string().min(5).optional(),
   date_of_submission: Joi.date().iso().optional(),
