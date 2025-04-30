@@ -126,7 +126,7 @@ const editProject = async function (req: Request, res: Response) {
     if (project.admin_id !== value.admin_id && project.admin_id !== "PJVLD001")
       return res.status(404).json({ message: "Invalid admin ID" });
 
-    const { admin_id, data } = value;
+    const { admin_id, ...data } = value;
     await project.update(data);
 
     //* invalidate cache if there is
