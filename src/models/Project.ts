@@ -78,12 +78,6 @@ Project.init(
     sequelize,
     modelName: "Project",
     timestamps: true,
-    indexes: [
-      {
-        unique: true,
-        fields: ["project_title"],
-      },
-    ],
   }
 );
 
